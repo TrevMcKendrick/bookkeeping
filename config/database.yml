@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: bookkeeping_development
   pool: 5
-  username: bookkeeping
+  username: trevor_development
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: bookkeeping_production
   pool: 5
-  username: bookkeeping
+  username: trevor_production
   password:
