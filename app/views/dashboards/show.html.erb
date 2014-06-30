@@ -1,3 +1,12 @@
 <h1>Your Dashboard</h1>
 <br>
 <%= button_to "Log out", destroy_user_session_path, :method => :delete %>
+<br>
+
+<%= form_for(Transaction.new) do |f| %>
+  Type: <%= f.text_field :account_type %><br>
+  Amount: <%= f.text_field :amount %><br>
+  Date: <%= f.date_field :date %><br>
+  Account: <%= f.text_field :account %><br>
+  <%= f.submit %>
+<% end %>
