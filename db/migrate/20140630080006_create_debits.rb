@@ -1,7 +1,7 @@
 class CreateDebits < ActiveRecord::Migration
   def change
     create_table :debits do |t|
-      t.string :account
+      t.string :category
 
       t.timestamps
     end
