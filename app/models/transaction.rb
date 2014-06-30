@@ -1,3 +1,3 @@
 class Transaction < ActiveRecord::Base
-  attr_accessor :account
+  attr_accessor :category
 end
