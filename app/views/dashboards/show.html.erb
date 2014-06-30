@@ -1,12 +1,17 @@
 <h1>Your Dashboard</h1>
-<br>
 <%= button_to "Log out", destroy_user_session_path, :method => :delete %>
 <br>
 
 <%= form_for(Transaction.new) do |f| %>
-  Type: <%= f.text_field :account_type %><br>
+  Transaction Type: <%= f.text_field :transaction_type %><br>
   Amount: <%= f.text_field :amount %><br>
   Date: <%= f.date_field :date %><br>
-  Account: <%= f.text_field :account %><br>
+  Category: <%= select_tag "transaction[category]", options_for_select(Category::DEFAULTS) %><br>
   <%= f.submit %>
+<% end %>
+
+<br>
+<% Transaction.all.each do |transaction| %>
+  <%= transaction.transaction_type + ": " + transaction.amount.to_s %>
+  <br>
 <% end %>
