@@ -1,3 +1,15 @@
 <h1>Add Account</h1>
 
-Select your bank <%= select_tag "finance_account", options_from_collection_for_select(FinanceInstitution.all, "plaid_type", "name") %>
+
+
+<%= form_for @finance_account_builder, url: finance_accounts_path, as: :finance_account do |f| %>
+Select your bank <%= select_tag "finance_account[plaid_type]", options_from_collection_for_select(FinanceInstitution.all, "plaid_type", "name") %><br>
+  Username <%= f.text_field :username  %><br>
+  Password <%= f.password_field :password %><br>
+  Bank account email <%= f.text_field :email %><br>
+  <%= f.submit :value => "Submit Bank Info" %>
+<% end %>
+
+
+
+<!-- bre_account  = Plaid.call.add_account("wells","bmckendrick","1wftm.COM","breannamckendrick@gmail.com") -->
