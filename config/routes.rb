@@ -7,10 +7,10 @@ Bookkeeping::Application.routes.draw do
   end
 
   get 'dashboard' => 'dashboards#show'
-
+  get 'finance_accounts' => 'finance_accounts#new'
   resources :entry_builders
   resources :entries
-
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

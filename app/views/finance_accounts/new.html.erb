@@ -1,0 +1,3 @@
+<h1>Add Account</h1>
+
+Select your bank <%= select_tag "finance_account", options_from_collection_for_select(FinanceInstitution.all, "plaid_type", "name") %>

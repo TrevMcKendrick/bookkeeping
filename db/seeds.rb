@@ -30,26 +30,44 @@ entry1 = Plutus::Entry.build(
                   {:account => "Cash", :amount => 100.00}])
                   entry1.save
 
-entry2 = Plutus::Entry.build(
-                :description => "Editing expense",
-                :debits => [
-                  {:account => "Payroll expense", :amount => 25.00}],
-                :credits => [
-                  {:account => "Cash", :amount => 25.00}])
-                  entry2.save
+FinanceInstitution.create(:plaid_type => "amex", :name => "American Express")
+FinanceInstitution.create(:plaid_type => "bofa", :name => "Bank of America")
+FinanceInstitution.create(:plaid_type => "chase", :name => "Chase")
+FinanceInstitution.create(:plaid_type => "citi", :name => "Citi")
+FinanceInstitution.create(:plaid_type => "us", :name => "US Bank")
+FinanceInstitution.create(:plaid_type => "USAA", :name => "USAA")
+FinanceInstitution.create(:plaid_type => "wells", :name => "Wells Fargo")
 
-entry3 = Plutus::Entry.build(
-                :description => "Took Dan Fogal out to lunch",
-                :debits => [
-                  {:account => "Food and Entertainment Expense", :amount => 38.25}],
-                :credits => [
-                  {:account => "Credit Card Payable", :amount => 38.25}])
-                  entry3.save
+if Rails.env == "development"
+  entry1 = Plutus::Entry.build(
+                  :description => "Gasoline",
+                  :debits => [
+                    {:account => "Auth expense", :amount => 100.00}],
+                  :credits => [
+                    {:account => "Cash", :amount => 100.00}])
+                    entry1.save
 
-entry4 = Plutus::Entry.build(
-                :description => "Family wedding pictures",
-                :debits => [
-                  {:account => "Cash", :amount => 1000}],
-                :credits => [
-                  {:account => "Services Revenue", :amount => 1000}])
-                  entry4.save
+  entry2 = Plutus::Entry.build(
+                  :description => "Editing expense",
+                  :debits => [
+                    {:account => "Payroll expense", :amount => 25.00}],
+                  :credits => [
+                    {:account => "Cash", :amount => 25.00}])
+                    entry2.save
+
+  entry3 = Plutus::Entry.build(
+                  :description => "Took Dan Fogal out to lunch",
+                  :debits => [
+                    {:account => "Food and Entertainment Expense", :amount => 38.25}],
+                  :credits => [
+                    {:account => "Credit Card Payable", :amount => 38.25}])
+                    entry3.save
+
+  entry4 = Plutus::Entry.build(
+                  :description => "Family wedding pictures",
+                  :debits => [
+                    {:account => "Cash", :amount => 1000}],
+                  :credits => [
+                    {:account => "Services Revenue", :amount => 1000}])
+                    entry4.save
+  end
