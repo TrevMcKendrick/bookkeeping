@@ -12,5 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require live_reload
 //= require_tree .

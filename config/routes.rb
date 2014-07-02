@@ -8,7 +8,8 @@ Bookkeeping::Application.routes.draw do
 
   get 'dashboard' => 'dashboards#show'
 
-  resources :transactions
+  resources :entry_builders
+  resources :entries
 
 
   # The priority is based upon order of creation: first created -> highest priority.

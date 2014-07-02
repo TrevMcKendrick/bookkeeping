@@ -11,38 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630080025) do
+ActiveRecord::Schema.define(version: 20140701193035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "credits", force: true do |t|
-    t.string   "account"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "amount",     precision: 9, scale: 2
-  end
-
-  create_table "debits", force: true do |t|
-    t.string   "account"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "amount",     precision: 9, scale: 2
-  end
-
-  create_table "journal_entries", force: true do |t|
-    t.date     "date"
+  create_table "plutus_accounts", force: true do |t|
+    t.string   "name"
+    t.string   "type"
+    t.boolean  "contra"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transactions", force: true do |t|
-    t.string   "account_type"
-    t.date     "date"
+  add_index "plutus_accounts", ["name", "type"], name: "index_plutus_accounts_on_name_and_type", using: :btree
+
+  create_table "plutus_amounts", force: true do |t|
+    t.string  "type"
+    t.integer "account_id"
+    t.integer "entry_id"
+    t.decimal "amount",     precision: 20, scale: 10
+  end
+
+  add_index "plutus_amounts", ["account_id", "entry_id"], name: "index_plutus_amounts_on_account_id_and_entry_id", using: :btree
+  add_index "plutus_amounts", ["entry_id", "account_id"], name: "index_plutus_amounts_on_entry_id_and_account_id", using: :btree
+  add_index "plutus_amounts", ["type"], name: "index_plutus_amounts_on_type", using: :btree
+
+  create_table "plutus_entries", force: true do |t|
+    t.string   "description"
+    t.integer  "commercial_document_id"
+    t.string   "commercial_document_type"
+    t.date     "effective_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount",       precision: 9, scale: 2
   end
+
+  add_index "plutus_entries", ["commercial_document_id", "commercial_document_type"], name: "index_entries_on_commercial_doc", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

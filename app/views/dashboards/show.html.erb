@@ -1,17 +1,33 @@
-<h1>Your Dashboard</h1>
 <%= button_to "Log out", destroy_user_session_path, :method => :delete %>
-<br>
+<h1>Your Dashboard</h1>
 
-<%= form_for(Transaction.new) do |f| %>
-  Transaction Type: <%= f.text_field :transaction_type %><br>
+<%= form_for @entrybuilder, url: entries_path, as: :entry do |f| %>
   Amount: <%= f.text_field :amount %><br>
   Date: <%= f.date_field :date %><br>
-  Category: <%= select_tag "transaction[category]", options_for_select(Category::DEFAULTS) %><br>
+  Account: <%= select_tag "entry[account]", options_from_collection_for_select(Plutus::Expense.all, "name", "name") %><br>
   <%= f.submit %>
 <% end %>
 
-<br>
-<% Transaction.all.each do |transaction| %>
-  <%= transaction.transaction_type + ": " + transaction.amount.to_s %>
-  <br>
+
+<h3>Revenue</h3>
+<% Plutus::Revenue.all.each do |revenue| %>
+  <% if revenue.balance != 0 %>
+    <%= revenue.name + ": " + number_to_currency(revenue.balance) %>
+    <br>
+  <% end %>
 <% end %>
+<h4>Total Revenue: <%= number_to_currency(Plutus::Revenue.balance) %> </h4>
+
+<br>
+<h3>Expenses</h3>
+<% Plutus::Expense.all.each do |expense| %>
+  <% if expense.balance != 0 %>
+    <%= expense.name + ": " + number_to_currency(expense.balance) %>
+    <br>
+  <% end %>
+<% end %>
+<h4>Total Expenses: <%= number_to_currency(Plutus::Expense.balance) %> </h4>
+
+<br>
+<h3>Profit</h3>
+<h4><%= number_to_currency(Plutus::Revenue.balance - Plutus::Expense.balance) %></h4>

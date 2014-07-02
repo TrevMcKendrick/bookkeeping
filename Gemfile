@@ -6,7 +6,7 @@ gem 'devise'
 
 gem 'pry', :group => "development"
 
-
+gem 'plutus', :git => 'git://github.com/trevmckendrick/plutus'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
