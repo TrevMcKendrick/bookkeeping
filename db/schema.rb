@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701193035) do
+ActiveRecord::Schema.define(version: 20140702063032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "finance_accounts", force: true do |t|
+    t.string   "plaid_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "balance"
+    t.text     "meta"
+    t.string   "institution_type"
+    t.string   "type"
+  end
+
+  create_table "finance_institutions", force: true do |t|
+    t.string   "plaid_type"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "plutus_accounts", force: true do |t|
     t.string   "name"
