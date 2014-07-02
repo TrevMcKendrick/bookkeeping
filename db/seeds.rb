@@ -6,6 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+if Rails.env == "development"
+  Plutus::Entry.destroy_all
+  Plutus::Amount.destroy_all
+  Plutus::Account.destroy_all
+end
+
 Plutus::Asset.create(:name => "Cash")
 Plutus::Asset.create(:name => "Accounts Receivable")
 Plutus::Revenue.create(:name => "Services Revenue")
@@ -15,9 +21,6 @@ Plutus::Expense.create(:name => "Food and Entertainment Expense")
 Plutus::Expense.create(:name => "Auto expense")
 Plutus::Liability.create(:name => "Sales Tax Payable")
 Plutus::Liability.create(:name => "Credit Card Payable")
-
-Plutus::Entry.destroy_all
-Plutus::Amount.destroy_all
 
 entry1 = Plutus::Entry.build(
                 :description => "Gasoline",
