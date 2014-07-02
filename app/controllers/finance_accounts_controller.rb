@@ -3,7 +3,7 @@ class FinanceAccountsController < ApplicationController
     @finance_account = FinanceAccountBuilder.new(finance_account_params).as_finance_account
     respond_to do |format|
       if @finance_account.save
-        format.html { redirect_to dashboard_url, notice: 'finance_account was successfully created.' }
+        format.html { redirect_to finance_accounts_path, notice: 'finance_account was successfully created.' }
         format.json { render action: 'show', status: :created, location: @finance_account }
       else
         format.html { render action: 'new' }
