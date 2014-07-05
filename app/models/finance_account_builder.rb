@@ -12,9 +12,8 @@ class FinanceAccountBuilder
 
   def as_finance_account
     account = Plaid.call.add_account(@plaid_type,@username,@password,@email)
-    binding.pry
     FinanceAccount.create(:access_token => account[:access_token])
   end
 
-  def 
+  def
 end
