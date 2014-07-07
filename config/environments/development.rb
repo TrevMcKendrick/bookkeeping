@@ -4,6 +4,10 @@ Bookkeeping::Application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
+  ActionDispatch::Reloader.to_prepare do
+    Rails.application.eager_load!
+  end
+  
   config.cache_classes = false
 
   # Do not eager load code on boot.
@@ -28,5 +32,5 @@ Bookkeeping::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
-  
+
 end
