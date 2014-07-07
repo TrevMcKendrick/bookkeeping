@@ -3,6 +3,8 @@ class Expense < Account
 
   belongs_to :user
 
+  CHART_OF_ACCOUNTS = ["Payroll Expense"]
+
   def defaults
     self.type = "Expense"
   end

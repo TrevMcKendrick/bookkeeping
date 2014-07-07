@@ -3,6 +3,8 @@ class Equity < Account
 
   belongs_to :user
 
+  CHART_OF_ACCOUNTS = ["Capital Contributions"]
+
   def defaults
     self.type = "Equity"
   end

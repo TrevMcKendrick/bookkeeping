@@ -3,6 +3,8 @@ class Asset < Account
 
   belongs_to :user
 
+  CHART_OF_ACCOUNTS = ["Cash", "Accounts Receivable", "Equipment"]
+
   def defaults
     self.type = "Asset"
   end

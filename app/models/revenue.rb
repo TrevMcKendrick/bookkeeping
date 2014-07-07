@@ -3,6 +3,8 @@ class Revenue < Account
 
   belongs_to :user
 
+  CHART_OF_ACCOUNTS = ["Sales"]
+
   def defaults
     self.type = "Revenue"
   end

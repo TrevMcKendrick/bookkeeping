@@ -3,6 +3,8 @@ class Liability < Account
 
   belongs_to :user
 
+  CHART_OF_ACCOUNTS = ["Accounts Payable"]
+
   def defaults
     self.type = "Liability"
   end
