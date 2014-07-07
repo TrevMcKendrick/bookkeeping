@@ -12,6 +12,8 @@ Bookkeeping::Application.routes.draw do
   resources :entries
   resources :finance_accounts
 
+  get 'income_statement' => 'income_statements#show'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

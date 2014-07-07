@@ -1,0 +1,18 @@
+<h1>Income Statement from July 1, 2014 to <%= Date.today %></h1>
+
+<h3>Revenues</h3>
+<% current_user.revenues.each do |account| %>
+  <%= account.name %> - <%= account.balance_between_dates("2014-07-01", Date.today + 2.day) %>
+  <br>
+<% end %>
+<h3>Total Revenues - <%= current_user.revenues.balance_between_dates("2014-07-01", Date.today) %></h3>
+
+<br>
+<h3>Expenses</h3>
+<% current_user.expenses.each do |account| %>
+  <%= account.name %> - <%= account.balance_between_dates("2014-07-01", Date.today) %>
+  <br>
+<% end %>
+<h3>Total Expenses - <%= current_user.expenses.balance_between_dates("2014-07-01", Date.today) %></h3>
+
+<h3>Profit - <%= current_user.revenues.balance_between_dates("2014-07-01", Date.today) - current_user.expenses.balance_between_dates("2014-07-01", Date.today) %> </h3>
