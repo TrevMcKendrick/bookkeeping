@@ -53,4 +53,8 @@ class Account < ActiveRecord::Base
     end.sum
   end
 
+  def trial_balance
+    debit_balance_as_of(Date.today) - credit_balance_as_of(Date.today)
+  end
+
 end
