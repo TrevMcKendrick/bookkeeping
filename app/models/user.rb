@@ -15,11 +15,4 @@ class User < ActiveRecord::Base
     self.accounts.where(:name => name).first
   end
 
-  # after_create :setup_accounts
-
-  # def setup_accounts
-  #   Account::DEFAULTS.each do |account|
-  #     self.account.create(:name => account[0], :type => account[1])
-  #   end
-  # end
 end
