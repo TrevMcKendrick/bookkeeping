@@ -17,13 +17,7 @@ FinanceInstitution.create(:plaid_type => "USAA", :name => "USAA")
 FinanceInstitution.create(:plaid_type => "wells", :name => "Wells Fargo")
 
 trevor = User.create(:email => "trevor@gmail.com", :password => "test")
-
-trevor.assets.create(:name => "Cash")
-trevor.assets.create(:name => "Accounts Receivable")
-trevor.liabilities.create(:name => "Accounts Payable")
-trevor.revenues.create(:name => "Sales")
-trevor.expenses.create(:name => "Payroll Expense")
-trevor.equities.create(:name => "Capital Contributions")
+breanna = User.create(:email => "breanna@gmail.com", :password => "test")
 
 #pair
 je = EntryBuilder.new(:amount => 225, :date => (Date.today - 6.months + 1.day), :debit_account => "Payroll Expense", :credit_account => "Accounts Payable" ).as_entry(trevor)
