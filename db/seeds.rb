@@ -7,28 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 if Rails.env == "development"
-  Plutus::Entry.destroy_all
-  Plutus::Amount.destroy_all
-  Plutus::Account.destroy_all
+  User.destroy_all
+  Account.destroy_all
+  JournalEntry.destroy_all
+  Credit.destroy_all
+  Debit.destroy_all
+  User.destroy_all
+  FinanceInstitution.destroy_all
 end
-
-Plutus::Asset.create(:name => "Cash")
-Plutus::Asset.create(:name => "Accounts Receivable")
-Plutus::Revenue.create(:name => "Services Revenue")
-Plutus::Expense.create(:name => "Payroll expense")
-Plutus::Expense.create(:name => "Payroll tax expense")
-Plutus::Expense.create(:name => "Food and Entertainment Expense")
-Plutus::Expense.create(:name => "Auto expense")
-Plutus::Liability.create(:name => "Sales Tax Payable")
-Plutus::Liability.create(:name => "Credit Card Payable")
-
-entry1 = Plutus::Entry.build(
-                :description => "Gasoline",
-                :debits => [
-                  {:account => "Auth expense", :amount => 100.00}],
-                :credits => [
-                  {:account => "Cash", :amount => 100.00}])
-                  entry1.save
 
 FinanceInstitution.create(:plaid_type => "amex", :name => "American Express")
 FinanceInstitution.create(:plaid_type => "bofa", :name => "Bank of America")
@@ -38,36 +24,23 @@ FinanceInstitution.create(:plaid_type => "us", :name => "US Bank")
 FinanceInstitution.create(:plaid_type => "USAA", :name => "USAA")
 FinanceInstitution.create(:plaid_type => "wells", :name => "Wells Fargo")
 
-if Rails.env == "development"
-  entry1 = Plutus::Entry.build(
-                  :description => "Gasoline",
-                  :debits => [
-                    {:account => "Auth expense", :amount => 100.00}],
-                  :credits => [
-                    {:account => "Cash", :amount => 100.00}])
-                    entry1.save
+trevor = User.create(:email => "trevor@gmail.com", :password => "test")
 
-  entry2 = Plutus::Entry.build(
-                  :description => "Editing expense",
-                  :debits => [
-                    {:account => "Payroll expense", :amount => 25.00}],
-                  :credits => [
-                    {:account => "Cash", :amount => 25.00}])
-                    entry2.save
+trevor.assets.create(:name => "Cash")
+trevor.assets.create(:name => "Accounts Receivable")
+trevor.liabilities.create(:name => "Accounts Payable")
+trevor.revenues.create(:name => "Sales")
+trevor.expenses.create(:name => "Payroll Expense")
+trevor.equities.create(:name => "Capital Contributions")
 
-  entry3 = Plutus::Entry.build(
-                  :description => "Took Dan Fogal out to lunch",
-                  :debits => [
-                    {:account => "Food and Entertainment Expense", :amount => 38.25}],
-                  :credits => [
-                    {:account => "Credit Card Payable", :amount => 38.25}])
-                    entry3.save
+#pair
+je = EntryBuilder.new(:amount => 225, :date => (Date.today - 6.months + 1.day), :debit_account => "Payroll Expense", :credit_account => "Accounts Payable" ).as_entry(trevor)
+je = EntryBuilder.new(:amount => 225, :date => (Date.today - 6.months + 2.weeks), :debit_account => "Accounts Payable", :credit_account => "Cash" ).as_entry(trevor)
+#pair
+je = EntryBuilder.new(:amount => 150, :date => (Date.today - 1.month), :debit_account => "Accounts Receivable", :credit_account => "Sales" ).as_entry(trevor)
+je = EntryBuilder.new(:amount => 150, :date => (Date.today - 1.month), :debit_account => "Cash", :credit_account => "Accounts Receivable" ).as_entry(trevor)
 
-  entry4 = Plutus::Entry.build(
-                  :description => "Family wedding pictures",
-                  :debits => [
-                    {:account => "Cash", :amount => 1000}],
-                  :credits => [
-                    {:account => "Services Revenue", :amount => 1000}])
-                    entry4.save
-  end
+je = EntryBuilder.new(:amount => 100, :date => (Date.today), :debit_account => "Cash", :credit_account => "Sales" ).as_entry(trevor)
+je = EntryBuilder.new(:amount => 125, :date => (Date.today - 5.days), :debit_account => "Cash", :credit_account => "Sales" ).as_entry(trevor)
+je = EntryBuilder.new(:amount => 525, :date => (Date.today - 1.day), :debit_account => "Payroll Expense", :credit_account => "Accounts Payable" ).as_entry(trevor)
+je = EntryBuilder.new(:amount => 1000, :date => (Date.today - 1.year), :debit_account => "Cash", :credit_account => "Capital Contributions" ).as_entry(trevor)
