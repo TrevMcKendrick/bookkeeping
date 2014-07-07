@@ -3,10 +3,10 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = EntryBuilder.new(entry_params).as_entry
+    @entry = EntryBuilder.new(entry_params).as_entry(current_user)
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to dashboard_url, notice: 'Entry was successfully created.' }
+        format.html { redirect_to dashboard_url, notice: 'Journal entry was successfully created.' }
         format.json { render action: 'show', status: :created, location: @entry }
       else
         format.html { render action: 'new' }
@@ -18,6 +18,6 @@ class EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:amount, :date, :account)
+    params.require(:entry).permit(:amount, :date, :debit_account, :credit_account)
   end
 end

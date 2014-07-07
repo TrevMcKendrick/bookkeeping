@@ -4,30 +4,7 @@
 <%= form_for @entrybuilder, url: entries_path, as: :entry do |f| %>
   Amount: <%= f.text_field :amount %><br>
   Date: <%= f.date_field :date %><br>
-  Account: <%= select_tag "entry[account]", options_from_collection_for_select(Plutus::Expense.all, "name", "name") %><br>
-  <%= f.submit %>
+  Debit: <%= select_tag "entry[debit_account]", options_from_collection_for_select(@user.accounts.all, "name", "name") %><br>
+  Credit: <%= select_tag "entry[credit_account]", options_from_collection_for_select(@user.accounts.all, "name", "name") %><br>
+  <%= f.submit "Create Journal Entry" %>
 <% end %>
-
-
-<h3>Revenue</h3>
-<% Plutus::Revenue.all.each do |revenue| %>
-  <% if revenue.balance != 0 %>
-    <%= revenue.name + ": " + number_to_currency(revenue.balance) %>
-    <br>
-  <% end %>
-<% end %>
-<h4>Total Revenue: <%= number_to_currency(Plutus::Revenue.balance) %> </h4>
-
-<br>
-<h3>Expenses</h3>
-<% Plutus::Expense.all.each do |expense| %>
-  <% if expense.balance != 0 %>
-    <%= expense.name + ": " + number_to_currency(expense.balance) %>
-    <br>
-  <% end %>
-<% end %>
-<h4>Total Expenses: <%= number_to_currency(Plutus::Expense.balance) %> </h4>
-
-<br>
-<h3>Profit</h3>
-<h4><%= number_to_currency(Plutus::Revenue.balance - Plutus::Expense.balance) %></h4>
