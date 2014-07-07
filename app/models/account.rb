@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   DEFAULTS = [["Cash", "Asset"], ["Accounts Receivable", "Asset"], ["Equipment", "Asset"], ["Accounts Payable", "Liability"], ["Payroll Expense", "Expense"], ["Sales", "Revenue"]]
 
   # validates_uniqueness_of :name
-  # validates_presence_of :type, :name
+  validates_presence_of :type, :name
 
   def debit_balance_as_of(date)
     time_range = ('1998-08-15')..(date.to_s)
