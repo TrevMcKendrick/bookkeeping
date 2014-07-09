@@ -11,8 +11,10 @@ Bookkeeping::Application.routes.draw do
   resources :entry_builders
   resources :entries
   resources :finance_accounts
+  resources :income_statements
 
-  get 'income_statement' => 'income_statements#show'
+  # get 'income_statement' => 'income_statements#show'
+  # get 'income_statement/download' => 'income_statements#download'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

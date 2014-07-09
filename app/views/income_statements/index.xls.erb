@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <!-- Report headers-->
+      <Row>
+        <Cell></Cell>
+        <Cell><Data ss:Type="String"><%= @income_statement.user.email %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell></Cell>
+        <Cell><Data ss:Type="String">Income Statement</Data></Cell>
+      </Row>
+      <Row>
+        <Cell></Cell>
+        <Cell><Data ss:Type="String"><%= @income_statement.start_date %> – <%= @income_statement.end_date %></Data></Cell>
+      </Row>
+
+    <!-- Revenues -->
+    <Row>
+      <Cell><Data ss:Type="String"><B>Revenues</B></Data></Cell>
+    </Row>
+    <% @income_statement.revenues.each do |revenue| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= revenue.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= revenue.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+      </Row>
+    <% end %>
+    <Row>
+      <Cell><Data ss:Type="String">Total Revenue</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @income_statement.user.revenues.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+    </Row>
+
+    <Row>
+      <Cell></Cell>
+    </Row>
+
+    <!-- Expenses -->
+
+    <Row>
+      <Cell><Data ss:Type="String"><B>Expenses</B></Data></Cell>
+    </Row>
+    <% @income_statement.expenses.each do |expense| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= expense.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= expense.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+      </Row>
+    <% end %>
+    <Row>
+      <Cell><Data ss:Type="String">Total Expenses</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @income_statement.user.expenses.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+    </Row>
+
+    <Row>
+      <Cell></Cell>
+    </Row>
+
+    <!-- Profit -->
+    <Row>
+      <Cell><Data ss:Type="String">Profit</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @income_statement.user.revenues.balance_between_dates("2014-07-01", Date.today) - @income_statement.user.expenses.balance_between_dates("2014-07-01", Date.today) %></Data></Cell>
+    </Row>
+
+
+    </Table>
+  </Worksheet>
+</Workbook>

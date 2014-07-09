@@ -1,12 +1,12 @@
 class IncomeStatementsController < ApplicationController
 
-  def show
-    @user = current_user
-    @income_statement = IncomeStatement.new
-    # respond_to do |format|
-    #   format.html
-    #   format.csv { send_date @income_statement.to_csv }
-    # end
+  def index
+    @income_statement = IncomeStatement.new(:user => current_user, :start_date => "2014-07-01", :end_date => "2014-07-09")
+    respond_to do |format|
+      format.html
+      format.xls
+      # format.csv { send_data @income_statement.to_csv }
+    end
   end
 
 end
