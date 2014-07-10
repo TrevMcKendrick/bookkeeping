@@ -7,8 +7,8 @@ class IncomeStatement
     @user = hash[:user]
     @start_date = hash[:start_date]
     @end_date = hash[:end_date]
-    @revenues = @user.revenues.to_a
-    @expenses = @user.expenses.to_a
+    @revenues = @user.revenues
+    @expenses = @user.expenses
   end
 
   def to_csv(options = {})
