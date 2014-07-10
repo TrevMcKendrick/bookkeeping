@@ -3,7 +3,7 @@ class Equity < Account
 
   belongs_to :user
 
-  CHART_OF_ACCOUNTS = ["Capital Contributions"]
+  CHART_OF_ACCOUNTS = ["Capital Contributions", "Retained Earnings"]
 
   def defaults
     self.type = "Equity"
@@ -14,6 +14,7 @@ class Equity < Account
   end
 
   def self.balance_as_of(date)
-    self.credit_balance_as_of(date) - self.debit_balance_as_of(date)
+    self.credit_balance_as_of(date) - self.debit_balance_as_of(date) + self.retained_earnings_as_of(date)
   end
+
 end
