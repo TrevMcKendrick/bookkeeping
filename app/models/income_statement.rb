@@ -19,4 +19,8 @@ class IncomeStatement
     end
   end
 
+  def profit(start_date, end_date)
+    self.revenues.balance_between_dates(start_date, end_date) - self.expenses.balance_between_dates(start_date, end_date)
+  end
+
 end

@@ -7,9 +7,9 @@ class BalanceSheet
     @user = hash[:user]
     @as_of = hash[:as_of]
     @period = hash[:period]
-    @assets = @user.assets.to_a
-    @liabilities = @user.liabilities.to_a
-    @equities = @user.equities.to_a
+    @assets = @user.assets
+    @liabilities = @user.liabilities
+    @equities = @user.equities
   end
 
   def to_csv(options = {})
