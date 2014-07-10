@@ -9,60 +9,70 @@
       <!-- Report headers-->
       <Row>
         <Cell></Cell>
-        <Cell><Data ss:Type="String"><%= @income_statement.user.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @balance_sheet.user.email %></Data></Cell>
       </Row>
       <Row>
         <Cell></Cell>
-        <Cell><Data ss:Type="String">Income Statement</Data></Cell>
+        <Cell><Data ss:Type="String">Balance Sheet</Data></Cell>
       </Row>
       <Row>
         <Cell></Cell>
-        <Cell><Data ss:Type="String"><%= @income_statement.start_date %> – <%= @income_statement.end_date %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @balance_sheet.period + "Balance Sheet as of " + @balance_sheet.as_of %></Data></Cell>
       </Row>
 
-    <!-- Revenues -->
+    <!-- Assets -->
     <Row>
-      <Cell><Data ss:Type="String"><B>Revenues</B></Data></Cell>
+      <Cell><Data ss:Type="String">Assets</Data></Cell>
     </Row>
-    <% @income_statement.revenues.each do |revenue| %>
+    <% @balance_sheet.assets.each do |asset| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= revenue.name %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= revenue.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= asset.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= asset.balance_as_of(@balance_sheet.as_of) %></Data></Cell>
       </Row>
     <% end %>
     <Row>
-      <Cell><Data ss:Type="String">Total Revenue</Data></Cell>
-      <Cell><Data ss:Type="Number"><%= @income_statement.user.revenues.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+      <Cell><Data ss:Type="String">Total Assets</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @balance_sheet.user.assets.balance_as_of(@balance_sheet.as_of) %></Data></Cell>
     </Row>
 
     <Row>
       <Cell></Cell>
     </Row>
 
-    <!-- Expenses -->
+    <!-- Liabilities -->
 
     <Row>
-      <Cell><Data ss:Type="String"><B>Expenses</B></Data></Cell>
+      <Cell><Data ss:Type="String"><B>Liabilities</B></Data></Cell>
     </Row>
-    <% @income_statement.expenses.each do |expense| %>
+    <% @balance_sheet.liabilities.each do |liability| %>
       <Row>
-        <Cell><Data ss:Type="String"><%= expense.name %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= expense.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= liability.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= liability.balance_as_of(@balance_sheet.as_of) %></Data></Cell>
       </Row>
     <% end %>
     <Row>
-      <Cell><Data ss:Type="String">Total Expenses</Data></Cell>
-      <Cell><Data ss:Type="Number"><%= @income_statement.user.expenses.balance_between_dates(@income_statement.start_date, @income_statement.end_date) %></Data></Cell>
+      <Cell><Data ss:Type="String">Total Liabilities</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @balance_sheet.user.liabilities.balance_as_of(@balance_sheet.as_of) %></Data></Cell>
     </Row>
 
     <Row>
       <Cell></Cell>
     </Row>
 
-    <!-- Profit -->
+    <!-- Owner's Equity -->
+    <% @balance_sheet.equities.each do |equity| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= equity.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= equity.balance_as_of(@balance_sheet.as_of) %></Data></Cell>
+      </Row>
+    <% end %>
     <Row>
-      <Cell><Data ss:Type="String">Profit</Data></Cell>
-      <Cell><Data ss:Type="Number"><%= @income_statement.user.revenues.balance_between_dates("2014-07-01", Date.today) - @income_statement.user.expenses.balance_between_dates("2014-07-01", Date.today) %></Data></Cell>
+      <Cell><Data ss:Type="String">Net Income for period</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @income_statement.profit(THE_BEGINNING, Date.today) %></Data></Cell>
+    </Row>
+    <Row>
+      <Cell><Data ss:Type="String">Total Owner's Equity</Data></Cell>
+      <Cell><Data ss:Type="Number"><%= @balance_sheet.user.equities.balance_as_of(@balance_sheet.as_of) + @income_statement.profit(THE_BEGINNING, Date.today) %></Data></Cell>
     </Row>
 
 
