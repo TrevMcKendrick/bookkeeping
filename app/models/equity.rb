@@ -14,7 +14,7 @@ class Equity < Account
   end
 
   def self.balance_as_of(date)
-    self.credit_balance_as_of(date) - self.debit_balance_as_of(date) + self.retained_earnings_as_of(date)
+    self.credit_balance_as_of(date) - self.debit_balance_as_of(date)
   end
 
 end
