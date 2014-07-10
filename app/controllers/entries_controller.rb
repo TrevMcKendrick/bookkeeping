@@ -18,6 +18,6 @@ class EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:amount, :date, :debit_account, :credit_account)
+    params.require(:entry).permit(:amount, :date, :debit, :credit)
   end
 end

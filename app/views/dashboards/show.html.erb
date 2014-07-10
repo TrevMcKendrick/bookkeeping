@@ -6,7 +6,7 @@
 <%= form_for @entrybuilder, url: entries_path, as: :entry do |f| %>
   Amount: <%= f.text_field :amount %><br>
   Date: <%= f.date_field :date %><br>
-  Debit: <%= select_tag "entry[debit_account]", options_from_collection_for_select(@user.accounts.all, "name", "name") %><br>
-  Credit: <%= select_tag "entry[credit_account]", options_from_collection_for_select(@user.accounts.all, "name", "name") %><br>
+  Debit: <%= select_tag "entry[debit]", options_from_collection_for_select(@user.accounts.all, "name", "name") %><br>
+  Credit: <%= select_tag "entry[credit]", options_from_collection_for_select(@user.accounts.all, "name", "name") %><br>
   <%= f.submit "Create Journal Entry" %>
 <% end %>
