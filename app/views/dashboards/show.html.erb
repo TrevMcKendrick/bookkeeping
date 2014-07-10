@@ -1,5 +1,6 @@
 <%= button_to "Log out", destroy_user_session_path, :method => :delete %>
-<h4><%= link_to "Income Statement", income_statement_path %>
+<h4><%= link_to "Income Statement", income_statements_path %> |
+<%= link_to "Balance Sheet", balance_sheets_path %></h4>
 <h1>Your Dashboard</h1>
 
 <%= form_for @entrybuilder, url: entries_path, as: :entry do |f| %>
