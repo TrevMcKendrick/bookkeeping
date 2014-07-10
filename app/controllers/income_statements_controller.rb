@@ -5,7 +5,6 @@ class IncomeStatementsController < ApplicationController
     respond_to do |format|
       format.html
       format.xls
-      # format.csv { send_data @income_statement.to_csv }
     end
   end
 
