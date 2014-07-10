@@ -1,5 +1,5 @@
 class Asset < Account
-  before_save :defaults
+  before_create :defaults
 
   belongs_to :user
 

@@ -4,16 +4,15 @@ class Account < ActiveRecord::Base
   has_many :debits
   has_many :credits
 
-  # validates_uniqueness_of :name
   validates_presence_of :type, :name
 
   def debit_balance_as_of(date)
-    time_range = ('1998-08-15')..(date.to_s)
+    time_range = (THE_BEGINNING)..(date.to_s)
     Debit.joins(:journal_entry, account: :user).where('journal_entries.effective_date' => time_range, 'accounts.name' => self.name, 'users.id' => self.user.id).sum(:amount)
   end
 
   def credit_balance_as_of(date)
-    time_range = ("1998-08-15")..(date.to_s)
+    time_range = (THE_BEGINNING)..(date.to_s)
     Credit.joins(:journal_entry, account: :user).where('journal_entries.effective_date' => time_range, 'accounts.name' => self.name, 'users.id' => self.user.id).sum(:amount)
   end
 
