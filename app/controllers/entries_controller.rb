@@ -5,11 +5,12 @@ class EntriesController < ApplicationController
   def create
     @entry = EntryBuilder.new(entry_params).as_entry(current_user)
     respond_to do |format|
-      if @entry.save
+      if @entry.valid?
+        @entry.save
         format.html { redirect_to dashboard_url, notice: 'Journal entry was successfully created.' }
         format.json { render action: 'show', status: :created, location: @entry }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to dashboard_url, notice: "Journal entry was NOT created! Debits and credits must balance." }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
       end
     end

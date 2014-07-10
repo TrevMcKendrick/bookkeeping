@@ -14,7 +14,7 @@ class EntryBuilder
     je = JournalEntry.new(:effective_date => @date)
     je.debits.build(:amount => @amount, :account => user.account(@debit))
     je.credits.build(:amount => @amount, :account => user.account(@credit))
-    je.save
+    je.save if je.valid?
     je
   end
 

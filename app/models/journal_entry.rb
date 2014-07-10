@@ -1,10 +1,11 @@
 class JournalEntry < ActiveRecord::Base
+  include ActiveModel::Validations
+
   has_many :debits
   has_many :credits
-
-  validate :has_debits?
-  validate :has_credits?
-  validate :balances?
+  validates_associated :debits
+  validates_associated :credits
+  validates :effective_date, presence: true
 
   def debit_total
     self.debits.sum(:amount)
@@ -12,20 +13,6 @@ class JournalEntry < ActiveRecord::Base
 
   def credit_total
     self.credits.sum(:amount)
-  end
-
-  private
-
-  def has_debits?
-    errors[:base] << "Journal entry needs a debit" if self.debits.blank?
-  end
-
-  def has_credits?
-    errors[:base] << "Journal entry needs a credit" if self.credits.blank?
-  end
-
-  def balances?
-    errors[:base] << "The journal entry doesn't balance" if self.debit_total != self.credit_total
   end
 
 end
