@@ -1,0 +1,32 @@
+<h1>Balance Sheet as of <%= Date.today %></h1>
+
+<h3>Asset</h3>
+<% current_user.assets.each do |asset| %>
+  <%= asset.name %> - <%= asset.balance_as_of(Date.today) %>
+  <br>
+<% end %>
+<h3>Total Assets - <%= current_user.assets.balance_as_of(Date.today) %></h3>
+
+<br>
+<h3>Liabilities</h3>
+<% current_user.liabilities.each do |liability| %>
+  <%= liability.name %> - <%= liability.balance_as_of(Date.today) %>
+  <br>
+<% end %>
+<h3>Total Liabilities - <%= current_user.liabilities.balance_as_of(Date.today) %></h3>
+
+<br>
+<h3>Owner's Equity</h3>
+<% current_user.equities.each do |equity| %>
+  <%= equity.name %> - <%= equity.balance_as_of(Date.today) %>
+  <br>
+<% end %>
+Retained Earnings: <%= Equity.retained_earnings_as_of(Date.today) %>
+<h3>Total Owner's Equity - <%= current_user.equities.balance_as_of(Date.today) %></h3>
+
+
+<p>
+  Download:
+  <%= link_to "CSV", balance_sheets_path(format: "csv") %> |
+  <%= link_to "Excel", balance_sheets_path(format: "xls") %>
+</p>

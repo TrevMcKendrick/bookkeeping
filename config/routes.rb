@@ -12,6 +12,7 @@ Bookkeeping::Application.routes.draw do
   resources :entries
   resources :finance_accounts
   resources :income_statements
+  resources :balance_sheets
 
   # get 'income_statement' => 'income_statements#show'
   # get 'income_statement/download' => 'income_statements#download'
